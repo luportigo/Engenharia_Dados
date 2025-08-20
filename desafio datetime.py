@@ -50,7 +50,7 @@ def sacar (*,saldo, valor, extrato, limite, numero_saques, limite_saques):
 
     return saldo, extrato
 
-def exibir_extrato (saldo, /, *, extrato)
+def exibir_extrato (saldo, /, *, extrato):
     print("\n================ EXTRATO ================")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo: .2f}")
@@ -58,7 +58,7 @@ def exibir_extrato (saldo, /, *, extrato)
 
 def criar_usuario(usuarios):
     cpf = input ("Infomr o CPF (somente número): ")
-    usuario = filtrar_usuarios (cpf, usuarios)
+    usuario = filtrar_usuario (cpf, usuarios)
 
     if usuario:
         print ("\n @@@ Já existe usuário com esse CPF! @@@")
@@ -71,11 +71,16 @@ def criar_usuario(usuarios):
 
     print("=== Usuário criado com sucesso! ===")
 
-def filtrar_usuarios (cpf, usuarios):
+def filtrar_usuario (cpf, usuarios):
     usuarios_filtrados = [usuario for usuario in usuarios if usuario["cpf"] == cpf]
     return usuarios_filtrados[0] if usuarios_filtrados else None
 
 def criar_conta(agencia, numero_conta, usuriarios):
+    cpf = input("Informe o CPF do usuário: ")
+    usuario = filtrar_usuario (cpf, usuarios)
+
+    
+
 
 def listar_contas(contas):
 
@@ -115,6 +120,15 @@ def main():
         elif opcao == "nu":
             criar_usuario(usuarios)
 
+        elif opcao == "nc":
+            numero_conta = len(contas) + 1
+            conta = criar_conta(AGENCIA, numero_conta, usuarios)
+
+            if conta:
+                contas.append(conta)
+
+        elif opcao == "lc":
+            listar_contas(contas)
 
         elif opcao == "q":
             break
