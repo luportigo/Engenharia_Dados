@@ -7,7 +7,7 @@ def menu():
     [e]\tExtrato
     [nc]\tNova conta
     [lc]\tListar contas
-    [nu]\t Novo usuário
+    [nu]\tNovo usuário
     [q]\tSair
     => """
     return input (textwrap.dedent(menu))
@@ -78,14 +78,14 @@ def criar_conta(agencia, numero_conta, usuarios):
 
     if usuario:
         print("\n === Conta criada com sucesso! ===")
-        return {"agencia": agencia, "numerodo_conta": numero_conta, "usuario": usuario}
+        return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
     
     print("\n @@@ Usuário não encontrado, fluxo de criação de conta encerrado! @@@")
     
 def listar_contas(contas):
     for conta in contas:
         linha = f"""\
-        Agência: \t {conta['agencia']}
+        Agência:\t{conta['agencia']}
         C/C:\t\t{conta['numero_conta']}
         Titular:\t{conta['usuario']['nome']}
     """
@@ -143,3 +143,6 @@ def main():
 
         else:
             print("Operação inválida, por favor selecione novamente a operação desejada.")
+
+
+main()
