@@ -1,10 +1,7 @@
 import textwrap
 
-
 def menu(): 
     menu = """ \n
-
-
     [d]\tDepositar
     [s]\tSacar
     [e]\tExtrato
@@ -15,7 +12,7 @@ def menu():
     => """
     return input (textwrap.dedent(menu))
 
-def despositar(saldo, valor, extrato, /):
+def depositar(saldo, valor, extrato, /):
     if valor > 0:
         saldo += valor
         extrato += f"Depósito:\tR$ {valor: .2f}\n"
@@ -75,24 +72,35 @@ def filtrar_usuario (cpf, usuarios):
     usuarios_filtrados = [usuario for usuario in usuarios if usuario["cpf"] == cpf]
     return usuarios_filtrados[0] if usuarios_filtrados else None
 
-def criar_conta(agencia, numero_conta, usuriarios):
+def criar_conta(agencia, numero_conta, usuarios):
     cpf = input("Informe o CPF do usuário: ")
     usuario = filtrar_usuario (cpf, usuarios)
 
+    if usuario:
+        print("\n === Conta criada com sucesso! ===")
+        return {"agencia": agencia, "numerodo_conta": numero_conta, "usuario": usuario}
     
-
-
+    print("\n @@@ Usuário não encontrado, fluxo de criação de conta encerrado! @@@")
+    
 def listar_contas(contas):
-
+    for conta in contas:
+        linha = f"""\
+        Agência: \t {conta['agencia']}
+        C/C:\t\t{conta['numero_conta']}
+        Titular:\t{conta['usuario']['nome']}
+    """
+    print("=" * 100)
+    print(textwrap.dedent(linha)) 
 
 def main():
+    AGENCIA = "0001"
     saldo = 0
     limite = 500
     extrato = ""
     numero_saques = 0
     LIMITE_SAQUES = 3
     usuarios = []
-    Contas = []
+    contas = []
 
     while True:
         opcao = menu()
